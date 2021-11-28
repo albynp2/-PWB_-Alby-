@@ -4,9 +4,47 @@
 <title>UTS PWB</title>
 </head>
 <body>
-
-<h1>Test HTML 1</h1>
-<p>This is a paragraph.</p>
+    <div class="kotak-input" style="border: 1px;">
+        <table border="1">
+            <tr>
+                <td style="border: none;"><u>Form Input</u></td>
+            </tr>
+            <tr>
+                <td style="border: none;">Nama</td>
+                <td style="border: none;">:</td>
+                <td style="border: none;"><input type="text"></td>
+                <td style="border: none;">Lama</td>
+                <td style="border: none;"><input type="text">Hari</td>
+            </tr>
+            <tr>
+                <td style="border: none;">Kode Booking</td>
+                <td style="border: none;">:</td>
+                <td style="border: none;">
+                    <select name="kode_booking" id="kode_booking">
+                        <option disabled selected value> -- select an option -- </option>
+                        <option value="AL02102">AL02102</option>
+                        <option value="BG03025">BG03025</option>
+                        <option value="CR02111">CR02111</option>
+                        <option value="KM03075">KM03075</option>
+                    </select> 
+                </td>
+            </tr>
+            <tr>
+                <td style="border: none;">Jumlah</td>
+                <td style="border: none;">:</td>
+                <td style="border: none;"><input type="text">Orang</td>
+                <td style="border: none;"></td>
+                <td style="border: none;">Jenis Pembayaran :
+                    <select name="jenis_pembayaran" id="jenis_pembayaran">
+                        <option disabled selected value> -- select an option -- </option>
+                        <option value="kk">Kartu Kredit</option>
+                        <option value="db">Debit</option>
+                        <option value="cs">Cash</option>
+                    </select> 
+                </td>
+            </tr>
+        </table>
+    </div>
 
 </body>
 </html> 
