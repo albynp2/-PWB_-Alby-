@@ -2,56 +2,60 @@
 <html>
 <head>
 <title>UTS PWB</title>
+<meta charset="utf-8" />
 </head>
 <body >
     <!-- <div class="all-kotak" style="text-align:center;"> -->
         <h1 style="text-align:center;">UTS PWB</h1>
         <div class="kotak-input" style="border: 1px;">
-            <table border="1" align="center">
-                <tr>
-                    <td style="border: none;"><u>Form Input</u></td>
-                </tr>
-                <tr>
-                    <td style="border: none;">Nama</td>
-                    <td style="border: none;">:</td>
-                    <td style="border: none;"><input type="text"></td>
-                    <td style="border: none;">Lama </td>
-                    <td style="border: none;"><input type="text"> Hari</td>
-                </tr>
-                <tr>
-                    <td style="border: none;">Kode Booking</td>
-                    <td style="border: none;">:</td>
-                    <td style="border: none;">
-                        <select name="kode_booking" id="kode_booking">
-                            <option disabled selected value>--Pilih Kode Booking--</option>
-                            <option value="AL02102">AL02102</option>
-                            <option value="BG03025">BG03025</option>
-                            <option value="CR02111">CR02111</option>
-                            <option value="KM03075">KM03075</option>
-                        </select> 
-                    </td>
-                </tr>
-                <tr>
-                    <td style="border: none;">Jumlah</td>
-                    <td style="border: none;">:</td>
-                    <td style="border: none;"><input type="text"> Orang</td>
-                    <td style="border: none;"></td>
-                    <td style="border: none;">Jenis Pembayaran :
-                        <select name="jenis_pembayaran" id="jenis_pembayaran">
-                            <option disabled selected value> --Pilih Pembayaran -- </option>
-                            <option value="kk">Kartu Kredit</option>
-                            <option value="db">Debit</option>
-                            <option value="cs">Cash</option>
-                        </select> 
-                    </td>
-                </tr>
-                <tr>
-                    <td style="border: none;">
-                        <input type="button" value="Proses" id="proses">
-                        <input type="button" value="Hapus" id="hapus">
-                    </td>
-                </tr>
-            </table>
+            <form class="" action="uts_pwb.html" method="post">
+                <table border="1" align="center">
+                    <tr>
+                        <td style="border: none;"><u>Form Input</u></td>
+                    </tr>
+                    <tr>
+                        <td style="border: none;">Nama</td>
+                        <td style="border: none;">:</td>
+                        <td style="border: none;"><input type="text" name="array[]" id="nama"></td>
+                        <td style="border: none;">Lama </td>
+                        <td style="border: none;"><input type="text"> Hari</td>
+                    </tr>
+                    <tr>
+                        <td style="border: none;">Kode Booking</td>
+                        <td style="border: none;">:</td>
+                        <td style="border: none;">
+                            <select name="kode_booking" id="kode_booking">
+                                <option disabled selected value>--Pilih Kode Booking--</option>
+                                <option value="AL02102">AL02102</option>
+                                <option value="BG03025">BG03025</option>
+                                <option value="CR02111">CR02111</option>
+                                <option value="KM03075">KM03075</option>
+                            </select> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: none;">Jumlah</td>
+                        <td style="border: none;">:</td>
+                        <td style="border: none;"><input type="text" name="jumlahOrang" id="jumlahOrang"> Orang</td>
+                        <td style="border: none;"></td>
+                        <td style="border: none;">Jenis Pembayaran :
+                            <select name="jenis_pembayaran" id="jenis_pembayaran">
+                                <option disabled selected value> --Pilih Pembayaran -- </option>
+                                <option value="Kartu Kredit">Kartu Kredit</option>
+                                <option value="Debit">Debit</option>
+                                <option value="Cash">Cash</option>
+                            </select> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border: none;">
+                            <!-- <input type="button" value="add" id="add" onclick="add()"> -->
+                            <input type="button" onclick="proses();" value="proses" />
+                            <input type="button" value="Hapus" id="hapus" onclick="hapus()">
+                        </td>
+                    </tr>
+                </table>
+            </form>
         </div>
         <br>  
         <!-- Kotak Output -->
@@ -61,9 +65,9 @@
                     <td style="border: none;"><u>Output</u></td>
                 </tr>
                 <tr>
-                    <td style="border: none;">Nama :</td>
+                    <td style="border: none;">Nama : <a id="viewNama"></a> </td>
                     <td style="border: none;"></td>
-                    <td style="border: none;">Kode Booking :</td>
+                    <td style="border: none;">Kode Booking :  <a id="viewKode_booking"></a> </td>
                 </tr>
                 <tr>
                     <td style="border: none;">Nama Kamar :</td>
@@ -73,12 +77,12 @@
                 <tr>
                     <td style="border: none;">Nomor :</td>
                     <td style="border: none;"></td>
-                    <td style="border: none;">Jumlah : ... Orang</td>
+                    <td style="border: none;">Jumlah : <a id="viewJumlahOrang"></a> Orang</td>
                 </tr>
                 <tr>
                     <td style="border: none;">Lama :.... Hari</td>
                     <td style="border: none;"></td>
-                    <td style="border: none;">Jenis Pembyaran :</td>
+                    <td style="border: none;">Jenis Pembyaran :<a id="viewJenis_pembayaran"></a></td>
                 </tr>
                 <tr>
                     <td style="border: none;">Potongan /Tambahan :....</td>
@@ -90,6 +94,36 @@
                 </tr>
             </table>
         </div>
+   <h1><p id="par"></p></h1>
     <!-- </div> -->
 </body>
 </html> 
+<script>
+function proses() {
+//   var x = document.getElementById("nama").value;
+//   var y = document.getElementById("kode_booking").value;
+//   var z = document.getElementById("jenis_pembayaran").value;
+//   var jum = document.getElementById("jumlahOrang").value; 
+
+//   document.getElementById("viewNama").innerHTML = x;
+//   document.getElementById("viewKode_booking").innerHTML = y;
+//   document.getElementById("viewJenis_pembayaran").innerHTML = z;
+//   document.getElementById("viewJumlahOrang").innerHTML = jum;
+
+var k = "The respective values are :";
+        function proses() {
+            var input = document.getElementsByName('array[]');
+  
+            for (var i = 0; i < input.length; i++) {
+                var a = input[i];
+                k = k + "array[" + i + "].value= "
+                                   + a.value + " ";
+            }
+  
+            document.getElementById("par").innerHTML = k;
+            document.getElementById("po").innerHTML = "Output";
+        }
+
+}
+
+</script>
