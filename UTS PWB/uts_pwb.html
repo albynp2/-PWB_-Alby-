@@ -8,7 +8,7 @@
     <!-- <div class="all-kotak" style="text-align:center;"> -->
         <h1 style="text-align:center;">UTS PWB</h1>
         <div class="kotak-input" style="border: 1px;">
-            <form class="" action="uts_pwb.html" method="post">
+            <form id="form-input" method="post">
                 <table border="1" align="center">
                     <tr>
                         <td style="border: none;"><u>Form Input</u></td>
@@ -16,9 +16,9 @@
                     <tr>
                         <td style="border: none;">Nama</td>
                         <td style="border: none;">:</td>
-                        <td style="border: none;"><input type="text" name="array[]" id="nama"></td>
+                        <td style="border: none;"> <input type="text" name="nama"></td>
                         <td style="border: none;">Lama </td>
-                        <td style="border: none;"><input type="text"> Hari</td>
+                        <td style="border: none;"><input type="text" name="lama"> Hari</td>
                     </tr>
                     <tr>
                         <td style="border: none;">Kode Booking</td>
@@ -36,10 +36,10 @@
                     <tr>
                         <td style="border: none;">Jumlah</td>
                         <td style="border: none;">:</td>
-                        <td style="border: none;"><input type="text" name="jumlahOrang" id="jumlahOrang"> Orang</td>
+                        <td style="border: none;"><input type="text" name="jumlah" id="jumlah"> Orang</td>
                         <td style="border: none;"></td>
                         <td style="border: none;">Jenis Pembayaran :
-                            <select name="jenis_pembayaran" id="jenis_pembayaran">
+                            <select name="jenisPem" id="jenisPem">
                                 <option disabled selected value> --Pilih Pembayaran -- </option>
                                 <option value="Kartu Kredit">Kartu Kredit</option>
                                 <option value="Debit">Debit</option>
@@ -50,8 +50,14 @@
                     <tr>
                         <td style="border: none;">
                             <!-- <input type="button" value="add" id="add" onclick="add()"> -->
-                            <input type="button" onclick="proses();" value="proses" />
-                            <input type="button" value="Hapus" id="hapus" onclick="hapus()">
+                            <!-- <input type="submit" value="Proses"> -->
+                            <!-- <input type="button" value="get it!" onclick="getvalues();" /> -->
+                            <!-- <button type="button" onclick="myFunction()">Proses</button>submit -->
+                            <button type="submit">Proses</button>
+                            <button type="reset">Reset</button>
+
+                            <!-- <button type="button" name="button" onclick="proses()" value="Proses"> -->
+                            <!-- <input type="button" value="Hapus" id="hapus" onclick="hapus()"> -->
                         </td>
                     </tr>
                 </table>
@@ -59,15 +65,15 @@
         </div>
         <br>  
         <!-- Kotak Output -->
-        <div class="kotak-output" style="border: 1px;">
+        <div class="kotak-output" style="border: 1px;" id="output-form">
             <table border="1" align="center">
                 <tr>
                     <td style="border: none;"><u>Output</u></td>
                 </tr>
                 <tr>
-                    <td style="border: none;">Nama : <a id="viewNama"></a> </td>
+                    <td style="border: none;">Nama : <a id="output-name"></a> </td>
                     <td style="border: none;"></td>
-                    <td style="border: none;">Kode Booking :  <a id="viewKode_booking"></a> </td>
+                    <td style="border: none;">Kode Booking :  <a id="output-kode_booking"></a> </td>
                 </tr>
                 <tr>
                     <td style="border: none;">Nama Kamar :</td>
@@ -77,12 +83,12 @@
                 <tr>
                     <td style="border: none;">Nomor :</td>
                     <td style="border: none;"></td>
-                    <td style="border: none;">Jumlah : <a id="viewJumlahOrang"></a> Orang</td>
+                    <td style="border: none;">Jumlah : <a id="output-jumlah"></a> Orang</td>
                 </tr>
                 <tr>
-                    <td style="border: none;">Lama :.... Hari</td>
+                    <td style="border: none;">Lama :<a id="output-lama"></a> Hari</td>
                     <td style="border: none;"></td>
-                    <td style="border: none;">Jenis Pembyaran :<a id="viewJenis_pembayaran"></a></td>
+                    <td style="border: none;">Jenis Pembyaran :<a id="output-jenisPem"></a></td>
                 </tr>
                 <tr>
                     <td style="border: none;">Potongan /Tambahan :....</td>
@@ -94,36 +100,66 @@
                 </tr>
             </table>
         </div>
-   <h1><p id="par"></p></h1>
+   <!-- <h1><script>document.write(inp[0]);</script></h1> -->
     <!-- </div> -->
 </body>
 </html> 
 <script>
-function proses() {
-//   var x = document.getElementById("nama").value;
-//   var y = document.getElementById("kode_booking").value;
-//   var z = document.getElementById("jenis_pembayaran").value;
-//   var jum = document.getElementById("jumlahOrang").value; 
 
-//   document.getElementById("viewNama").innerHTML = x;
-//   document.getElementById("viewKode_booking").innerHTML = y;
-//   document.getElementById("viewJenis_pembayaran").innerHTML = z;
-//   document.getElementById("viewJumlahOrang").innerHTML = jum;
-
-var k = "The respective values are :";
-        function proses() {
-            var input = document.getElementsByName('array[]');
-  
-            for (var i = 0; i < input.length; i++) {
-                var a = input[i];
-                k = k + "array[" + i + "].value= "
-                                   + a.value + " ";
-            }
-  
-            document.getElementById("par").innerHTML = k;
-            document.getElementById("po").innerHTML = "Output";
+// logic olah data nama kamar
+function getRoom(code) {
+      code = code.substring(0, 2);
+      const rooms = {
+        "AL": {
+          name: "Alamanda",
+          price: 450000
+        },
+        "BG": {
+          name: "Bougenvile",
+          price: 350000
+        },
+        "CR": {
+          name: "Crysan",
+          price: 375000
+        },
+        "KM": {
+          name: "Kemuning",
+          price: 425000
         }
+      };
 
-}
+      return rooms[code];
+      console.log(getRoom);
+    }
+
+
+// logic get data
+function setOutput(datas) {
+      document.getElementById('output-name').innerText = datas['nama'];
+      document.getElementById('output-lama').innerText = datas['lama'];
+      document.getElementById('output-jenisPem').innerText = datas['jenisPem'];
+      document.getElementById('output-jumlah').innerText = datas['jumlah'];
+      document.getElementById('output-kode_booking').innerText = datas['kode_booking'];
+
+   
+    }
+    document.getElementById('form-input').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      document.getElementById('output-form').style.display = 'none';
+
+      const formData = new FormData(this);
+
+      let datas = [];
+
+      for (var pair of formData.entries()) {
+        datas[pair[0]] = pair[1];
+      }
+
+
+      setOutput(datas);
+      document.getElementById('output-form').style.display = 'block';
+    });
+
 
 </script>
